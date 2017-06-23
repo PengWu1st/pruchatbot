@@ -1,5 +1,5 @@
 const apiHost = '';
-const apiRoot = `${apiHost}/natparks/api/v1`
+const apiRoot = `${apiHost}/pruchatbot/api/v1`
 
 export default {
   apiRoot

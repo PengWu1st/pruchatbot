@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import Conversation from '../services/conversation';
-import ParkCard from '../components/ParkCard';
-import AnimalsCard from '../components/AnimalsCard';
-import PlantsCard from '../components/PlantsCard';
-import WeatherCard from '../components/WeatherCard';
 import './App.css';
 
 class App extends Component {
@@ -23,50 +19,15 @@ class App extends Component {
       <div className="app">
         <header>Prudential Agency</header>
         <section ref="main">
-          { this.state.conversationHistory.map((h,i) => this.renderExchange(h, i)) }
+          {/*{ this.state.conversationHistory.map((h,i) => this.renderExchange(h, i)) }*/
+           this.state.conversationHistory.map((h,i) => this.renderText(h, i))
+          }
         </section>
         <footer>
         { this.renderInputView()}
         </footer>
       </div>
     );
-  }
-
-  renderExchange(exchange, key) {
-    return !!exchange.output.cardType
-      ? this.renderCard(exchange, key)
-      : this.renderText(exchange, key);
-  }
-
-  renderCard(exchange, key) {
-    switch(exchange.output.cardType) {
-      case 'park':
-        return (
-          <div key={key} className="exchange">
-            { exchange.input.text ? <div className="user-msg">{exchange.input.text}</div> : null }
-            <div className="watson-msg"><ParkCard park={exchange.output.park}/></div>
-          </div>);
-      case 'animals':
-        return (
-          <div key={key} className="exchange">
-            { exchange.input.text ? <div className="user-msg">{exchange.input.text}</div> : null }
-            <div className="watson-msg"><AnimalsCard park={exchange.output.park}/></div>
-          </div>);
-      case 'plants':
-        return (
-          <div key={key} className="exchange">
-            { exchange.input.text ? <div className="user-msg">{exchange.input.text}</div> : null }
-            <div className="watson-msg"><PlantsCard park={exchange.output.park}/></div>
-          </div>);
-      case 'weather':
-        return (
-          <div key={key} className="exchange">
-            { exchange.input.text ? <div className="user-msg">{exchange.input.text}</div> : null }
-            <div className="watson-msg"><WeatherCard weather={exchange.output.weather}/></div>
-          </div>);    
-      default:
-        this.renderText(exchange,key);
-    }
   }
 
   renderText(exchange, key) {
